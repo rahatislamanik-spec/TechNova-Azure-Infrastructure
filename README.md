@@ -21,8 +21,7 @@ As a self-directed learning project, I simulated being contracted as a Cloud Adm
 
 ## 🗺️ Architecture Diagram
 
-![TechNova Architecture](https://raw.githubusercontent.com/rahatislamanik-spec/TechNova-Azure-Infrastructure/main/architecture-diagram.png)
-
+👉 [View Full Case Study & Architecture](https://rahatislamanik-spec.github.io/TechNova-Azure-Infrastructure/TechNova-CaseStudy.html)
 ---
 
 ## 🏗️ What I Built
