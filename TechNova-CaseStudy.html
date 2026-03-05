@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechNova — Azure Cloud Case Study</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azure: #0078D4;
+    --azure-light: #50B4FC;
+    --azure-dark: #004E8C;
+    --accent: #00D4AA;
+    --warn: #FF6B35;
+    --bg: #050A14;
+    --bg2: #0A1628;
+    --bg3: #0F1F3D;
+    --text: #E8F0FE;
+    --muted: #7B9CCF;
+    --border: rgba(0,120,212,0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    line-height: 1.7;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 60px 40px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(0,120,212,0.25) 0%, transparent 70%),
+      radial-gradient(ellipse 50% 40% at 80% 80%, rgba(0,212,170,0.1) 0%, transparent 60%);
+  }
+
+  .grid-bg {
+    position: absolute;
+    inset: 0;
+    background-image: 
+      linear-gradient(rgba(0,120,212,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,120,212,0.07) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 80%);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0,120,212,0.15);
+    border: 1px solid rgba(0,120,212,0.4);
+    color: var(--azure-light);
+    padding: 8px 20px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 32px;
+    position: relative;
+    animation: fadeDown 0.8s ease forwards;
+  }
+
+  .badge::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.5); }
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(42px, 8vw, 96px);
+    font-weight: 800;
+    line-height: 1;
+    position: relative;
+    animation: fadeUp 0.9s ease 0.2s both;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--azure-light), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: clamp(16px, 2vw, 20px);
+    color: var(--muted);
+    max-width: 600px;
+    margin: 24px auto 48px;
+    font-weight: 300;
+    animation: fadeUp 0.9s ease 0.4s both;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 0.9s ease 0.6s both;
+  }
+
+  .meta-item {
+    text-align: center;
+  }
+
+  .meta-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--azure-light);
+  }
+
+  .meta-label {
+    font-size: 12px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  section {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 100px 40px;
+  }
+
+  .section-label {
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 16px;
+  }
+
+  h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+
+  h2 em {
+    font-style: normal;
+    color: var(--azure-light);
+  }
+
+  p {
+    color: var(--muted);
+    font-size: 17px;
+    max-width: 680px;
+    margin-bottom: 16px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+    margin: 0 40px;
+  }
+
+  /* STORY BLOCK */
+  .story-block {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 48px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .story-block::before {
+    content: '"';
+    position: absolute;
+    top: -20px;
+    left: 40px;
+    font-family: 'Syne', sans-serif;
+    font-size: 200px;
+    color: rgba(0,120,212,0.08);
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .story-block p {
+    font-size: 19px;
+    line-height: 1.9;
+    color: #A8C4E8;
+    max-width: 100%;
+  }
+
+  .story-block p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* PHASES */
+  .phases {
+    display: grid;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .phase {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 28px;
+    align-items: start;
+    transition: border-color 0.3s, transform 0.3s;
+    cursor: default;
+  }
+
+  .phase:hover {
+    border-color: rgba(0,120,212,0.5);
+    transform: translateX(8px);
+  }
+
+  .phase-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 48px;
+    font-weight: 800;
+    color: rgba(0,120,212,0.2);
+    line-height: 1;
+    min-width: 60px;
+  }
+
+  .phase-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 100px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .tag-foundation { background: rgba(0,120,212,0.15); color: var(--azure-light); }
+  .tag-network { background: rgba(0,212,170,0.15); color: var(--accent); }
+  .tag-security { background: rgba(255,107,53,0.15); color: var(--warn); }
+  .tag-ha { background: rgba(147,51,234,0.15); color: #C084FC; }
+  .tag-backup { background: rgba(234,179,8,0.15); color: #FCD34D; }
+
+  .phase h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    color: var(--text);
+  }
+
+  .phase p {
+    font-size: 15px;
+    margin-bottom: 16px;
+    max-width: 100%;
+  }
+
+  .phase-tasks {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .task-chip {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+  /* OBJECTIVES */
+  .objectives-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .obj-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 32px;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .obj-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(0,120,212,0.4);
+  }
+
+  .obj-icon {
+    font-size: 36px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .obj-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .obj-card p {
+    font-size: 14px;
+    max-width: 100%;
+    line-height: 1.7;
+  }
+
+  /* ACCOMPLISHMENTS */
+  .accomplishments {
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 64px;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .accomplishments::after {
+    content: '';
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(0,212,170,0.08), transparent 70%);
+    pointer-events: none;
+  }
+
+  .acc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 32px;
+    margin-top: 40px;
+  }
+
+  .acc-item {
+    text-align: center;
+  }
+
+  .acc-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 52px;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--azure-light), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  .acc-desc {
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 100%;
+    text-align: center;
+  }
+
+  /* SKILLS */
+  .skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .skill {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 10px 20px;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .skill:hover {
+    border-color: var(--azure);
+    background: rgba(0,120,212,0.1);
+  }
+
+  .skill-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* END GOAL */
+  .end-goal {
+    text-align: center;
+    padding: 120px 40px;
+    position: relative;
+  }
+
+  .end-goal::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 60% 50% at 50% 50%, rgba(0,120,212,0.12), transparent 70%);
+  }
+
+  .end-goal h2 {
+    font-size: clamp(32px, 5vw, 64px);
+    max-width: 800px;
+    margin: 0 auto 32px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+
+  .cta {
+    padding: 16px 36px;
+    border-radius: 100px;
+    font-size: 15px;
+    font-weight: 500;
+    font-family: 'DM Sans', sans-serif;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+
+  .cta-primary {
+    background: linear-gradient(135deg, var(--azure), var(--azure-dark));
+    color: white;
+    border: none;
+    box-shadow: 0 8px 32px rgba(0,120,212,0.3);
+  }
+
+  .cta-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 40px rgba(0,120,212,0.4);
+  }
+
+  .cta-secondary {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+
+  .cta-secondary:hover {
+    border-color: var(--azure-light);
+    color: var(--azure-light);
+  }
+
+  /* FOOTER */
+  footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (max-width: 600px) {
+    section { padding: 60px 20px; }
+    .story-block { padding: 32px 24px; }
+    .accomplishments { padding: 40px 24px; }
+    .phase { grid-template-columns: 1fr; gap: 8px; }
+    .phase-number { font-size: 32px; }
+    .hero-meta { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="grid-bg"></div>
+  <div class="badge">Azure Cloud Case Study · 2026</div>
+  <h1>Building <span>TechNova</span><br>from the Ground Up</h1>
+  <p class="hero-sub">A self-directed journey designing, deploying, and securing a complete enterprise Azure cloud infrastructure from scratch.</p>
+  <div class="hero-meta">
+    <div class="meta-item">
+      <div class="meta-value">5</div>
+      <div class="meta-label">Phases</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">16+</div>
+      <div class="meta-label">Azure Services</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">2</div>
+      <div class="meta-label">Days to Build</div>
+    </div>
+    <div class="meta-item">
+      <div class="meta-value">$40</div>
+      <div class="meta-label">Estimated Cost</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- THE STORY -->
+<section class="reveal">
+  <div class="section-label">The Story</div>
+  <h2>A company needed a cloud.<br><em>I built it.</em></h2>
+  <div class="story-block">
+    <p>
+      <strong>TechNova Inc. is a growing Canadian tech startup.</strong> They've outgrown their on-premise servers and need to move to the cloud — but they need it done right. Secure. Scalable. Cost-efficient. Resilient enough to survive failures without going offline.
+      <br><br>
+      As their newly contracted Cloud Administrator, I was handed one mandate: <strong>design and deploy a complete Azure cloud infrastructure from scratch</strong> — with no pre-built templates, no guided labs, and no safety net. Just an Azure subscription, a plan, and the skills to execute it.
+      <br><br>
+      Over two focused build sessions, I architected TechNova's entire cloud environment — from the first resource group to the final backup policy. Every decision had a reason. Every resource had a purpose. <strong>This is that story.</strong>
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- OBJECTIVE -->
+<section class="reveal">
+  <div class="section-label">The Objective</div>
+  <h2>Three goals.<br><em>One infrastructure.</em></h2>
+  <div class="objectives-grid">
+    <div class="obj-card">
+      <span class="obj-icon">🔐</span>
+      <h3>Security First</h3>
+      <p>Deploy an infrastructure where no resource is exposed unnecessarily. Every VM secured behind Bastion. Every role following least-privilege. Every disk encrypted.</p>
+    </div>
+    <div class="obj-card">
+      <span class="obj-icon">⚡</span>
+      <h3>Always Available</h3>
+      <p>Build a system that doesn't go down when a single server fails. Load balanced. Auto-scaling. Backed up. Designed to survive failures gracefully.</p>
+    </div>
+    <div class="obj-card">
+      <span class="obj-icon">💰</span>
+      <h3>Cost Conscious</h3>
+      <p>Deliver enterprise-grade infrastructure without enterprise-grade waste. Budget alerts, right-sized VMs, lifecycle policies, and resource cleanup baked in from day one.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- THE BUILD -->
+<section class="reveal">
+  <div class="section-label">The Build</div>
+  <h2>Five phases.<br><em>Built in order. Built with intent.</em></h2>
+  <div class="phases">
+
+    <div class="phase">
+      <div class="phase-number">01</div>
+      <div>
+        <span class="phase-tag tag-foundation">Foundation</span>
+        <h3>Resource Governance</h3>
+        <p>Before deploying a single resource, the house needed a structure. A dedicated Resource Group was created with consistent naming conventions and tags — Environment, Project, Owner — so every resource is traceable, billable, and manageable from day one.</p>
+        <div class="phase-tasks">
+          <span class="task-chip">TechNova-RG</span>
+          <span class="task-chip">Resource Tagging</span>
+          <span class="task-chip">Budget Alert ($150)</span>
+          <span class="task-chip">Canada East Region</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-number">02</div>
+      <div>
+        <span class="phase-tag tag-network">Networking</span>
+        <h3>Hub-and-Spoke Network Architecture</h3>
+        <p>Three Virtual Networks were designed and deployed using the industry-standard hub-and-spoke pattern. The Hub VNet handles management traffic. Two Spoke VNets separate application and database workloads. VNet Peering connects them. NSGs lock down every subnet.</p>
+        <div class="phase-tasks">
+          <span class="task-chip">Hub VNet (10.0.0.0/16)</span>
+          <span class="task-chip">App Spoke VNet</span>
+          <span class="task-chip">DB Spoke VNet</span>
+          <span class="task-chip">VNet Peering</span>
+          <span class="task-chip">NSG Rules</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-number">03</div>
+      <div>
+        <span class="phase-tag tag-security">Security</span>
+        <h3>Compute & Security Hardening</h3>
+        <p>Two Linux VMs were deployed — but never exposed directly to the internet. Azure Bastion provides secure browser-based access with no public IP. RBAC enforces least-privilege across all roles. Microsoft Defender for Cloud monitors the entire environment for threats.</p>
+        <div class="phase-tasks">
+          <span class="task-chip">2x Linux VMs (B1s)</span>
+          <span class="task-chip">Azure Bastion</span>
+          <span class="task-chip">RBAC Roles</span>
+          <span class="task-chip">Defender for Cloud</span>
+          <span class="task-chip">No Public IPs</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-number">04</div>
+      <div>
+        <span class="phase-tag tag-ha">High Availability</span>
+        <h3>Load Balancing & Resilience</h3>
+        <p>TechNova's app can't afford downtime. An Azure Load Balancer distributes incoming traffic across both VMs with health probes continuously checking server availability. If one VM goes down, traffic automatically shifts to the healthy one — users never notice.</p>
+        <div class="phase-tasks">
+          <span class="task-chip">Azure Load Balancer</span>
+          <span class="task-chip">Health Probes</span>
+          <span class="task-chip">Load Balancing Rules</span>
+          <span class="task-chip">Backend Pool</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="phase">
+      <div class="phase-number">05</div>
+      <div>
+        <span class="phase-tag tag-backup">Backup & Storage</span>
+        <h3>Data Protection & Business Continuity</h3>
+        <p>Data loss is not an option. A Storage Account with access controls and lifecycle management policies was configured. Azure Backup protects both VMs with defined recovery policies — ensuring TechNova can recover from any failure with minimal data loss and downtime.</p>
+        <div class="phase-tasks">
+          <span class="task-chip">Storage Account</span>
+          <span class="task-chip">RBAC Access Controls</span>
+          <span class="task-chip">Lifecycle Policies</span>
+          <span class="task-chip">Azure Backup</span>
+          <span class="task-chip">Recovery Services Vault</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ACCOMPLISHMENTS -->
+<section class="reveal">
+  <div class="section-label">Accomplishments</div>
+  <h2>What was<br><em>delivered.</em></h2>
+  <div class="accomplishments">
+    <div class="acc-grid">
+      <div class="acc-item">
+        <div class="acc-number">16+</div>
+        <div class="acc-desc">Azure services configured end-to-end</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-number">3</div>
+        <div class="acc-desc">VNets peered in hub-and-spoke architecture</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-number">0</div>
+        <div class="acc-desc">Public IPs exposed on production VMs</div>
+      </div>
+      <div class="acc-item">
+        <div class="acc-number">~$40</div>
+        <div class="acc-desc">Total cost — well within $200 budget</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 48px;">
+      <p style="color: var(--text); font-size: 17px; max-width: 100%; margin-bottom: 24px;">Skills demonstrated across this project:</p>
+      <div class="skills-list">
+        <span class="skill"><span class="skill-dot"></span>Virtual Networking</span>
+        <span class="skill"><span class="skill-dot"></span>Network Security Groups</span>
+        <span class="skill"><span class="skill-dot"></span>Azure Bastion</span>
+        <span class="skill"><span class="skill-dot"></span>Load Balancing</span>
+        <span class="skill"><span class="skill-dot"></span>RBAC & IAM</span>
+        <span class="skill"><span class="skill-dot"></span>Microsoft Defender</span>
+        <span class="skill"><span class="skill-dot"></span>Azure Backup</span>
+        <span class="skill"><span class="skill-dot"></span>Storage Management</span>
+        <span class="skill"><span class="skill-dot"></span>Cost Governance</span>
+        <span class="skill"><span class="skill-dot"></span>Resource Tagging</span>
+        <span class="skill"><span class="skill-dot"></span>High Availability Design</span>
+        <span class="skill"><span class="skill-dot"></span>Disaster Recovery</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- END GOAL -->
+<section class="end-goal reveal">
+  <div class="section-label">The End Goal</div>
+  <h2>Not just a project.<br><em>Proof I can do the job.</em></h2>
+  <p style="max-width: 600px; margin: 0 auto; text-align: center; font-size: 18px;">
+    TechNova's infrastructure demonstrates that I can take a blank Azure subscription and deliver a secure, scalable, production-ready cloud environment — the exact skillset companies hire Cloud Administrators for.
+  </p>
+  <div class="cta-row">
+    <a href="#" class="cta cta-primary">View on GitHub</a>
+    <a href="#" class="cta cta-secondary">Connect on LinkedIn</a>
+  </div>
+</section>
+
+<footer>
+  Built by <strong>Md Rahat Islam Anik</strong> · Cloud Computing & Network Administration · George Brown College · Toronto, Canada
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+  reveals.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

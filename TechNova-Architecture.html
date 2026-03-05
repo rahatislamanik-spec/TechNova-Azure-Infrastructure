@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechNova Inc. — Azure Cloud Architecture</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #0A0F1E;
+    font-family: 'DM Mono', monospace;
+    min-height: 100vh;
+    padding: 40px;
+    color: #E8F0FE;
+  }
+
+  .page {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: -1px;
+  }
+
+  .header h1 span {
+    color: #0078D4;
+  }
+
+  .header p {
+    color: #7B9CCF;
+    font-size: 13px;
+    margin-top: 8px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  /* LEGEND */
+  .legend {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 11px;
+    color: #7B9CCF;
+    letter-spacing: 1px;
+  }
+
+  .legend-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 3px;
+  }
+
+  /* MAIN DIAGRAM */
+  .diagram {
+    position: relative;
+  }
+
+  /* RESOURCE GROUP */
+  .resource-group {
+    background: rgba(0, 120, 212, 0.05);
+    border: 2px solid rgba(0, 120, 212, 0.3);
+    border-radius: 20px;
+    padding: 32px;
+    position: relative;
+  }
+
+  .rg-label {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: #0078D4;
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 4px 16px;
+    border-radius: 100px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* INTERNET */
+  .internet-row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 24px;
+  }
+
+  .internet-box {
+    background: rgba(255,255,255,0.05);
+    border: 1px dashed rgba(255,255,255,0.2);
+    border-radius: 12px;
+    padding: 12px 32px;
+    font-size: 12px;
+    color: #7B9CCF;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* ARROW DOWN */
+  .arrow-down {
+    display: flex;
+    justify-content: center;
+    margin: 8px 0;
+    color: #0078D4;
+    font-size: 20px;
+  }
+
+  /* VNETS ROW */
+  .vnets-row {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 20px;
+    margin-bottom: 24px;
+  }
+
+  /* VNET */
+  .vnet {
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+  }
+
+  .vnet-hub {
+    background: rgba(0, 120, 212, 0.08);
+    border: 1.5px solid rgba(0, 120, 212, 0.4);
+  }
+
+  .vnet-app {
+    background: rgba(0, 180, 100, 0.08);
+    border: 1.5px solid rgba(0, 180, 100, 0.4);
+  }
+
+  .vnet-db {
+    background: rgba(255, 107, 53, 0.08);
+    border: 1.5px solid rgba(255, 107, 53, 0.4);
+  }
+
+  .vnet-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .vnet-hub .vnet-title { color: #50B4FC; }
+  .vnet-app .vnet-title { color: #4ADE80; }
+  .vnet-db .vnet-title { color: #FF8C69; }
+
+  .vnet-cidr {
+    font-size: 10px;
+    color: #7B9CCF;
+    margin-bottom: 16px;
+    letter-spacing: 1px;
+  }
+
+  /* RESOURCE CARDS */
+  .resource-card {
+    background: rgba(255,255,255,0.05);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 10px;
+    border-left: 3px solid;
+    font-size: 11px;
+  }
+
+  .resource-card:last-child { margin-bottom: 0; }
+
+  .resource-card .rc-name {
+    font-weight: 500;
+    color: #E8F0FE;
+    margin-bottom: 2px;
+  }
+
+  .resource-card .rc-detail {
+    color: #7B9CCF;
+    font-size: 10px;
+  }
+
+  .rc-bastion { border-color: #50B4FC; }
+  .rc-subnet { border-color: #0078D4; }
+  .rc-vm { border-color: #4ADE80; }
+  .rc-lb { border-color: #00D4AA; }
+  .rc-nsg { border-color: #F59E0B; }
+  .rc-dbsubnet { border-color: #FF8C69; }
+  .rc-dbnsg { border-color: #EF4444; }
+
+  /* PEERING ARROWS */
+  .peering-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin: 16px 0;
+    position: relative;
+  }
+
+  .peering-line {
+    flex: 1;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, #0078D4, transparent);
+    position: relative;
+  }
+
+  .peering-label {
+    background: rgba(0,120,212,0.15);
+    border: 1px solid rgba(0,120,212,0.4);
+    color: #50B4FC;
+    font-size: 10px;
+    padding: 4px 12px;
+    border-radius: 100px;
+    white-space: nowrap;
+    letter-spacing: 1px;
+  }
+
+  /* BOTTOM ROW */
+  .bottom-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-top: 8px;
+  }
+
+  .bottom-card {
+    border-radius: 12px;
+    padding: 16px;
+    border: 1px solid;
+  }
+
+  .bc-storage {
+    background: rgba(147, 51, 234, 0.08);
+    border-color: rgba(147, 51, 234, 0.3);
+  }
+
+  .bc-keyvault {
+    background: rgba(234, 179, 8, 0.08);
+    border-color: rgba(234, 179, 8, 0.3);
+  }
+
+  .bc-backup {
+    background: rgba(0, 212, 170, 0.08);
+    border-color: rgba(0, 212, 170, 0.3);
+  }
+
+  .bc-rbac {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.3);
+  }
+
+  .bc-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .bc-storage .bc-title { color: #C084FC; }
+  .bc-keyvault .bc-title { color: #FCD34D; }
+  .bc-backup .bc-title { color: #00D4AA; }
+  .bc-rbac .bc-title { color: #FCA5A5; }
+
+  .bc-name {
+    font-size: 10px;
+    color: #7B9CCF;
+    margin-bottom: 4px;
+  }
+
+  .bc-detail {
+    font-size: 10px;
+    color: #4B6A8F;
+  }
+
+  /* FOOTER */
+  .footer {
+    text-align: center;
+    margin-top: 32px;
+    color: #4B6A8F;
+    font-size: 11px;
+    letter-spacing: 1px;
+  }
+
+  /* CONNECTING LINES between vnets */
+  .vnets-container {
+    position: relative;
+  }
+
+  .peering-arrows {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 33%;
+    margin: -4px 0;
+    position: relative;
+    z-index: 10;
+  }
+
+  .peer-arrow {
+    color: #0078D4;
+    font-size: 18px;
+    background: #0A0F1E;
+    padding: 0 8px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,120,212,0.3);
+    font-size: 11px;
+    color: #50B4FC;
+    letter-spacing: 1px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <h1>TechNova<span> Inc.</span> — Azure Cloud Infrastructure</h1>
+    <p>AZ-104 Portfolio Project · Self-Directed · East US · 2026</p>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background:#0078D4"></div> Networking</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#4ADE80"></div> Compute</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#F59E0B"></div> Security</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#C084FC"></div> Storage</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#00D4AA"></div> Backup & Recovery</div>
+    <div class="legend-item"><div class="legend-dot" style="background:#FCD34D"></div> Key Management</div>
+  </div>
+
+  <!-- MAIN DIAGRAM -->
+  <div class="diagram">
+    <div class="resource-group">
+      <div class="rg-label">📦 TechNova-RG · Resource Group · East US</div>
+
+      <!-- INTERNET -->
+      <div class="internet-row">
+        <div class="internet-box">
+          🌐 Internet / Users
+        </div>
+      </div>
+      <div class="arrow-down">↓ Public Traffic (HTTP/HTTPS)</div>
+
+      <!-- VNETS -->
+      <div class="vnets-row">
+
+        <!-- HUB VNET -->
+        <div class="vnet vnet-hub">
+          <div class="vnet-title">🔷 Hub VNet</div>
+          <div class="vnet-cidr">10.0.0.0/16</div>
+          <div class="resource-card rc-bastion">
+            <div class="rc-name">🔐 Azure Bastion</div>
+            <div class="rc-detail">TechNova-Bastion · Secure VM Access</div>
+          </div>
+          <div class="resource-card rc-subnet">
+            <div class="rc-name">HubSubnet</div>
+            <div class="rc-detail">10.0.1.0/24</div>
+          </div>
+          <div class="resource-card rc-subnet">
+            <div class="rc-name">AzureBastionSubnet</div>
+            <div class="rc-detail">10.0.2.0/24</div>
+          </div>
+        </div>
+
+        <!-- APP VNET -->
+        <div class="vnet vnet-app">
+          <div class="vnet-title">🟢 App VNet</div>
+          <div class="vnet-cidr">10.1.0.0/16</div>
+          <div class="resource-card rc-vm">
+            <div class="rc-name">💻 TechNova-VM1</div>
+            <div class="rc-detail">Ubuntu 22.04 · DC1s_v3 · AppSubnet</div>
+          </div>
+          <div class="resource-card rc-vm">
+            <div class="rc-name">💻 TechNova-VM2</div>
+            <div class="rc-detail">Ubuntu 22.04 · DC1s_v3 · AppSubnet</div>
+          </div>
+          <div class="resource-card rc-lb">
+            <div class="rc-name">⚖️ Load Balancer</div>
+            <div class="rc-detail">TechNova-LB · Port 80 · Health Probes</div>
+          </div>
+          <div class="resource-card rc-nsg">
+            <div class="rc-name">🛡️ NSG</div>
+            <div class="rc-detail">Allow HTTP:80 · Allow HTTPS:443</div>
+          </div>
+        </div>
+
+        <!-- DB VNET -->
+        <div class="vnet vnet-db">
+          <div class="vnet-title">🟠 DB VNet</div>
+          <div class="vnet-cidr">10.2.0.0/16</div>
+          <div class="resource-card rc-dbsubnet">
+            <div class="rc-name">DBSubnet</div>
+            <div class="rc-detail">10.2.1.0/24</div>
+          </div>
+          <div class="resource-card rc-dbnsg">
+            <div class="rc-name">🔒 DB-NSG</div>
+            <div class="rc-detail">Allow SQL:1433 from AppSubnet only</div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- PEERING LABELS -->
+      <div style="display:flex; justify-content:space-between; padding: 0 8px; margin-top: -8px; margin-bottom: 16px;">
+        <div style="width:33%; text-align:center;">
+          <span style="background:rgba(0,120,212,0.15); border:1px solid rgba(0,120,212,0.4); color:#50B4FC; font-size:10px; padding:4px 12px; border-radius:100px; letter-spacing:1px;">
+            ↔ Hub-to-App VNet Peering
+          </span>
+        </div>
+        <div style="width:33%"></div>
+        <div style="width:33%; text-align:center;">
+          <span style="background:rgba(0,120,212,0.15); border:1px solid rgba(0,120,212,0.4); color:#50B4FC; font-size:10px; padding:4px 12px; border-radius:100px; letter-spacing:1px;">
+            ↔ Hub-to-DB VNet Peering
+          </span>
+        </div>
+      </div>
+
+      <!-- BOTTOM ROW -->
+      <div class="bottom-row">
+        <div class="bottom-card bc-storage">
+          <div class="bc-title">💾 Storage Account</div>
+          <div class="bc-name">technovastorage01</div>
+          <div class="bc-detail">LRS · Hot Tier · Lifecycle Policy · Blob Container</div>
+        </div>
+        <div class="bottom-card bc-keyvault">
+          <div class="bc-title">🔑 Key Vault</div>
+          <div class="bc-name">TechNova-KV01</div>
+          <div class="bc-detail">Secrets Management · TechNova-DB-Password</div>
+        </div>
+        <div class="bottom-card bc-backup">
+          <div class="bc-title">🔄 Recovery Vault</div>
+          <div class="bc-name">TechNova-RSV</div>
+          <div class="bc-detail">VM Backup · VM1 + VM2 Protected · Enhanced Policy</div>
+        </div>
+        <div class="bottom-card bc-rbac">
+          <div class="bc-title">👤 RBAC</div>
+          <div class="bc-name">Role Assignment</div>
+          <div class="bc-detail">VM Contributor · rahatanik.cloud · Least Privilege</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Built by Md Rahat Islam Anik · Cloud Computing & Network Administration · George Brown College · Toronto, Canada · 2026
+  </div>
+
+</div>
+
+</body>
+</html>
