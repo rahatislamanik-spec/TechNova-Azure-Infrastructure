@@ -2,7 +2,7 @@
 
 ### Hub-and-Spoke Architecture · Built from a Blank Subscription · No Templates. No Guided Labs. No Safety Net.
 
-**Md Rahat Islam Anik · Self-Directed Case Study · 2026**
+**Md Rahat Islam Anik · Azure Infrastructure Case Study · 2026**
 
 [![Live Case Study](https://img.shields.io/badge/Live%20Case%20Study-View%20Now-0078D4?style=for-the-badge&logo=microsoft-azure&logoColor=white)](https://rahatislamanik-spec.github.io/TechNova-Azure-Infrastructure/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-rahatislamanik-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/rahatislamanik)
@@ -12,6 +12,18 @@
 
 | 5 Phases | 16+ Azure Services | 2 Days to Build | ~$40 Total Cost |
 |:---:|:---:|:---:|:---:|
+
+---
+
+## The Problem
+
+TechNova Inc. — a growing Canadian tech startup — had outgrown their on-premise servers with no cloud presence, no disaster recovery, no network segmentation, and no scalable path forward. A single server failure would take the entire operation offline.
+
+## The Solution
+
+A complete Azure cloud infrastructure built from a blank subscription — hub-and-spoke VNet architecture, zero public IPs on production VMs, Azure Bastion for secure access, Load Balancer with health probes, Key Vault for secrets management, and automated backup policies across all workloads.
+
+**16+ Azure services. ~$40 total cost. Zero pre-built templates.**
 
 ---
 
@@ -160,7 +172,7 @@ The full interactive case study — with architecture diagrams, per-phase docume
 ## Author
 
 **Md Rahat Islam Anik**
-Cloud Computing & Network Administration · George Brown College · May 2026
+Azure Administrator · Cloud & Infrastructure Operations Specialist · Toronto, Canada
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/rahatislamanik)
 [![GitHub](https://img.shields.io/badge/GitHub-Portfolio-181717?style=flat&logo=github)](https://github.com/rahatislamanik-spec)
