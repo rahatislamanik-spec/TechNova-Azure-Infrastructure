@@ -1,0 +1,35 @@
+path	alt	type
+assets/diagrams/technova-reference-architecture.jpg	TechNova Advanced Azure Infrastructure Architecture Diagram	Reference architecture diagram
+assets/screenshots/technova-01-technova-rg-all-resources-overview-in-azure-portal.jpg	TechNova-RG — all resources overview in Azure Portal	Azure Portal screenshot
+assets/screenshots/technova-02-resource-group-page-2-showing-full-resource-list.jpg	Resource Group — page 2 showing full resource list	Azure Portal screenshot
+assets/screenshots/technova-03-resource-tags-applied-environment-project-owner.jpg	Resource tags applied — Environment, Project, Owner	Azure Portal screenshot
+assets/screenshots/technova-04-resource-group-review-and-create-confirmation.jpg	Resource Group review and create confirmation	Azure Portal screenshot
+assets/screenshots/technova-05-app-vnet-address-space-and-subnet-configuration.jpg	App VNet — address space and subnet configuration	Azure Portal screenshot
+assets/screenshots/technova-06-app-vnet-subnet-details-and-peering-settings.jpg	App VNet — subnet details and peering settings	Azure Portal screenshot
+assets/screenshots/technova-07-db-vnet-isolated-database-network-configuration.jpg	DB VNet — isolated database network configuration	Azure Portal screenshot
+assets/screenshots/technova-08-all-three-vnets-deployed-hub-app-and-db.jpg	All three VNets deployed — Hub, App, and DB	Azure Portal screenshot
+assets/screenshots/technova-09-vnet-peering-configuration-between-hub-and-spokes.jpg	VNet Peering configuration between Hub and spokes	Azure Portal screenshot
+assets/screenshots/technova-10-vnet-peerings-confirmed-connected-status-verified.jpg	VNet Peerings confirmed — Connected status verified	Azure Portal screenshot
+assets/screenshots/technova-11-ip-addressing-and-subnet-configuration-details.jpg	IP addressing and subnet configuration details	Azure Portal screenshot
+assets/screenshots/technova-12-azure-marketplace-resource-creation-workflow.jpg	Azure Marketplace — resource creation workflow	Azure Portal screenshot
+assets/screenshots/technova-13-technova-vm1-overview-and-configuration-details.jpg	TechNova-VM1 — overview and configuration details	Azure Portal screenshot
+assets/screenshots/technova-14-technova-vm2-overview-and-configuration-details.jpg	TechNova-VM2 — overview and configuration details	Azure Portal screenshot
+assets/screenshots/technova-15-vm2-successfully-deployed-and-running.jpg	VM2 successfully deployed and running	Azure Portal screenshot
+assets/screenshots/technova-16-rbac-least-privilege-role-assignments-on-resource-group.jpg	RBAC — least-privilege role assignments on Resource Group	Azure Portal screenshot
+assets/screenshots/technova-17-web-nsg-overview-and-inbound-rules.jpg	Web NSG — overview and inbound rules	Azure Portal screenshot
+assets/screenshots/technova-18-nsg-http-port-80-and-https-port-443-rules-configured.jpg	NSG — HTTP port 80 and HTTPS port 443 rules configured	Azure Portal screenshot
+assets/screenshots/technova-19-nsg-additional-http-https-rule-confirmation.jpg	NSG — additional HTTP/HTTPS rule confirmation	Azure Portal screenshot
+assets/screenshots/technova-20-db-nsg-database-layer-network-security-group.jpg	DB NSG — database layer network security group	Azure Portal screenshot
+assets/screenshots/technova-21-db-nsg-sql-port-1433-restricted-to-appsubnet-only.jpg	DB NSG — SQL port 1433 restricted to AppSubnet only	Azure Portal screenshot
+assets/screenshots/technova-22-nsg-associated-to-subnet-traffic-filtering-active.jpg	NSG associated to subnet — traffic filtering active	Azure Portal screenshot
+assets/screenshots/technova-23-technova-lb-load-balancer-overview-and-configuration.jpg	TechNova-LB — Load Balancer overview and configuration	Azure Portal screenshot
+assets/screenshots/technova-24-load-balancing-rule-port-80-traffic-distribution.jpg	Load Balancing Rule — port 80 traffic distribution	Azure Portal screenshot
+assets/screenshots/technova-25-backend-pool-vm1-and-vm2-registered-and-active.jpg	Backend Pool — VM1 and VM2 registered and active	Azure Portal screenshot
+assets/screenshots/technova-26-health-probe-continuously-checking-vm-availability.jpg	Health Probe — continuously checking VM availability	Azure Portal screenshot
+assets/screenshots/technova-27-storage-account-overview-and-access-configuration.jpg	Storage Account — overview and access configuration	Azure Portal screenshot
+assets/screenshots/technova-28-blob-container-storage-container-configured.jpg	Blob Container — storage container configured	Azure Portal screenshot
+assets/screenshots/technova-29-key-vault-technova-db-password-secret-stored.jpg	Key Vault — TechNova-DB-Password secret stored	Azure Portal screenshot
+assets/screenshots/technova-30-key-vault-overview-technova-kv01-configuration.jpg	Key Vault overview — TechNova-KV01 configuration	Azure Portal screenshot
+assets/screenshots/technova-31-recovery-services-vault-backup-management.jpg	Recovery Services Vault — backup management	Azure Portal screenshot
+assets/screenshots/technova-32-azure-backup-vm-backup-policy-configured.jpg	Azure Backup — VM backup policy configured	Azure Portal screenshot
+assets/screenshots/technova-33-technova-rg-complete-infrastructure-all-17-resources-deployed.jpg	TechNova-RG — complete infrastructure, all 17 resources deployed	Azure Portal screenshot
