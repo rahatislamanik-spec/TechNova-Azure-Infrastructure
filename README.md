@@ -1,6 +1,6 @@
 # TechNova Inc. — Azure Cloud Infrastructure
 
-### Hub-and-Spoke Architecture · Built from a Blank Subscription · No Templates. No Guided Labs. No Safety Net.
+### Azure Infrastructure Case Study · Hub-and-Spoke Networking · Screenshot-Evidenced Build
 
 **Md Rahat Islam Anik · Azure Infrastructure Case Study · 2026**
 
@@ -10,7 +10,7 @@
 
 ---
 
-| 5 Phases | 16+ Azure Services | 2 Days to Build | ~$40 Total Cost |
+| 5 Phases | 16+ Azure Resources/Services | Screenshot Evidence | Cost-Aware Lab Build |
 |:---:|:---:|:---:|:---:|
 
 ---
@@ -21,9 +21,9 @@ TechNova Inc. — a growing Canadian tech startup — had outgrown their on-prem
 
 ## The Solution
 
-A complete Azure cloud infrastructure built from a blank subscription — hub-and-spoke VNet architecture, zero public IPs on production VMs, Azure Bastion for secure access, Load Balancer with health probes, Key Vault for secrets management, and automated backup policies across all workloads.
+A production-style Azure infrastructure lab built from a blank subscription — hub-and-spoke VNet architecture, zero public IPs on workload VM NICs, Azure Bastion for secure access, Load Balancer with health probes, Key Vault for secrets management, and Recovery Services Vault backup configuration.
 
-**16+ Azure services. ~$40 total cost. Zero pre-built templates.**
+**16+ Azure resources/services. Cost-aware build. Evidence mapped to screenshots.**
 
 ---
 
@@ -31,22 +31,22 @@ A complete Azure cloud infrastructure built from a blank subscription — hub-an
 
 TechNova Inc. is a growing Canadian tech startup. They've outgrown their on-premise servers and need to move to the cloud — but they need it done right. Secure. Scalable. Cost-efficient. Resilient enough to survive failures without going offline.
 
-As their newly contracted Cloud Administrator, I was handed one mandate: **design and deploy a complete Azure cloud infrastructure from scratch** — with no pre-built templates, no guided labs, and no safety net. Just an Azure subscription, a plan, and the skills to execute it.
+For this case study, I worked from a blank Azure subscription and a business-style scenario: **design and deploy a secure, segmented, cost-aware Azure infrastructure foundation**. The goal was to show the same planning and implementation thinking expected from a junior Azure or cloud administrator.
 
-Over two focused build sessions, I architected TechNova's entire cloud environment — from the first resource group to the final backup policy. Every decision had a reason. Every resource had a purpose.
+The build moves from governance to networking, compute, access, load balancing, and backup evidence. Every phase is tied to portal screenshots so the project can be reviewed without relying only on claims.
 
 ---
 
 ## Three Goals. One Infrastructure.
 
 **Security First**
-Deploy an infrastructure where no resource is exposed unnecessarily. Every VM secured behind Azure Bastion. Every role following least-privilege. Every disk encrypted. Zero public IPs on production VMs.
+Deploy an infrastructure where workload VMs are not directly exposed to the internet. Management access is handled through Azure Bastion, network exposure is controlled with NSGs, and RBAC assignments are reviewed at resource scope.
 
 **Always Available**
 Build a system that doesn't go down when a single server fails. Load balanced across backend pools. Health probes replacing failed instances. Recovery Services Vault protecting against data loss.
 
 **Cost Conscious**
-Deliver enterprise-grade infrastructure without enterprise-grade waste. Budget alerts, right-sized VMs (Standard B1s), lifecycle policies, and resource cleanup baked in from day one. Total build cost: ~$40.
+Deliver a cost-aware lab environment without unnecessary resource sprawl. Budget alerts, lab-sized VM choices, tagging, and cleanup planning are included from day one.
 
 ---
 
@@ -86,17 +86,17 @@ VNet Peering connects the spokes to the hub without traffic routing through the 
 ### Phase 03 — Compute & Security
 **2x Linux VMs · Azure Bastion · RBAC · Microsoft Defender**
 
-Two Ubuntu Server 22.04 VMs (Standard B1s) were deployed into the private subnets — **zero public IPs**. The only access path is through Azure Bastion, which provides browser-based SSH/RDP without exposing management ports to the internet.
+Two Ubuntu Server 22.04 VMs were deployed into private subnets — **zero public IPs on the VM NICs**. The intended management path is Azure Bastion, which provides browser-based SSH/RDP without exposing management ports directly to the internet.
 
-RBAC was configured to enforce least-privilege access across the subscription. Microsoft Defender for Cloud was enabled to provide continuous security posture assessment and threat detection across all resources.
+RBAC was reviewed and demonstrated at the resource-group scope. The evidence shows Owner and Virtual Machine Contributor assignments; in a production rollout, privileged access would be reduced further with named groups, break-glass controls, and periodic access reviews.
 
 | Component | Configuration |
 |---|---|
 | VM OS | Ubuntu Server 22.04 |
-| VM Size | Standard B1s |
-| Public IPs on VMs | 0 |
+| VM Size | Lab-sized Azure VM SKU shown in screenshots |
+| Public IPs on VM NICs | 0 |
 | Access Method | Azure Bastion |
-| Identity Control | RBAC — Least Privilege |
+| Identity Control | RBAC reviewed at resource scope |
 | Threat Detection | Microsoft Defender for Cloud |
 
 ---
@@ -106,7 +106,7 @@ RBAC was configured to enforce least-privilege access across the subscription. M
 
 A single VM — no matter how well configured — is a single point of failure. Phase 04 placed an Azure Load Balancer in front of both VMs, distributing traffic across a backend pool with health probe monitoring.
 
-Health probes continuously verify VM availability. When a probe fails, the Load Balancer automatically removes the unhealthy instance from the rotation — no manual intervention, no visible service interruption.
+Health probes continuously verify VM availability. When a probe fails, Azure Load Balancer can stop sending traffic to that unhealthy backend instance, depending on the configured rule and probe behavior.
 
 ---
 
@@ -116,9 +116,9 @@ Health probes continuously verify VM availability. When a probe fails, the Load 
 The final layer: data protection and secrets management.
 
 - **Storage Account** — structured blob storage with lifecycle management
-- **Azure Key Vault** — centralized secrets and encryption key management; no credentials hardcoded anywhere
+- **Azure Key Vault** — centralized secret storage pattern; no secret values are exposed in this repository
 - **Recovery Services Vault** — backup policy applied to both VMs
-- **Azure Backup** — automated backup schedule with retention policy configured and verified
+- **Azure Backup** — backup policy and retention settings configured and evidenced in screenshots
 
 A hardened VM with no backup is still one bad day away from total data loss. Backup is not optional — it's the last line of defence.
 
@@ -130,9 +130,9 @@ A hardened VM with no backup is still one bad day away from total data loss. Bac
 |---|---|
 | Azure services configured | 16+ |
 | VNets peered | 3 (Hub-and-Spoke) |
-| Public IPs on production VMs | 0 |
-| Total build cost | ~$40 |
-| Build time | 2 days |
+| Public IPs on workload VM NICs | 0 |
+| Evidence screenshots | 33 Azure Portal screenshots |
+| Build style | Cost-aware Azure lab implementation |
 
 ---
 
@@ -143,9 +143,41 @@ A hardened VM with no backup is still one bad day away from total data loss. Bac
 | Region | East US |
 | Resource Group | TechNova-RG |
 | VM OS | Ubuntu Server 22.04 |
-| VM Size | Standard B1s |
+| VM Size | Lab-sized Azure VM SKU shown in screenshots |
 | Architecture | Hub-and-Spoke |
 | Access Method | Azure Bastion (no public IPs) |
+
+---
+
+## Evidence Status
+
+| Area | Status | Evidence |
+|---|---|---|
+| Resource group, tags, and budget | Implemented | Azure Portal screenshots |
+| Hub-and-spoke VNets and peering | Implemented | Azure Portal screenshots |
+| VM deployment and private NICs | Implemented | Azure Portal screenshots |
+| NSG segmentation | Implemented | Azure Portal screenshots |
+| Azure Load Balancer, backend pool, and probe | Implemented | Azure Portal screenshots |
+| Key Vault secret storage pattern | Implemented | Azure Portal screenshots; secret value not exposed |
+| Recovery Services Vault and backup policy | Implemented | Azure Portal screenshots |
+| Azure Firewall, Application Gateway, Private Endpoints, Azure SQL, PIM, Azure Policy | Reference architecture only | Not implemented in this repo |
+| Production rollout | Not performed | Lab environment; assumptions documented below |
+
+See [docs/evidence-map.md](docs/evidence-map.md) for the screenshot-by-screenshot evidence map.
+
+---
+
+## Limitations and Production Assumptions
+
+This is a portfolio lab, not a production tenant handover. A production rollout would still need:
+
+- named Entra ID groups instead of direct privileged user assignments
+- break-glass account design and access review process
+- Azure Policy assignments for governance enforcement
+- diagnostic settings, Log Analytics, and alert rules
+- backup restore testing, not only backup policy configuration
+- formal change control, rollback plan, and runbook documentation
+- private endpoint and firewall design if the application/data layer required it
 
 ---
 
@@ -157,7 +189,7 @@ A hardened VM with no backup is still one bad day away from total data loss. Bac
 
 ## Skills Demonstrated
 
-`Azure Infrastructure Design` · `Hub-and-Spoke Architecture` · `VNet Peering` · `Network Security Groups` · `Azure Bastion` · `RBAC` · `Least-Privilege Access` · `Microsoft Defender for Cloud` · `Load Balancing` · `Azure Key Vault` · `Secrets Management` · `Azure Backup` · `Cost Governance` · `Resource Tagging` · `Linux Administration`
+`Azure Infrastructure Design` · `Hub-and-Spoke Architecture` · `VNet Peering` · `Network Security Groups` · `Azure Bastion` · `RBAC Review` · `Microsoft Defender for Cloud` · `Load Balancing` · `Azure Key Vault` · `Secrets Management Pattern` · `Azure Backup` · `Cost Governance` · `Resource Tagging` · `Linux Administration`
 
 ---
 
