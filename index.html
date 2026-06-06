@@ -246,6 +246,17 @@
     text-align: center;
   }
 
+  .scope-note {
+    margin: 14px 18px 18px;
+    padding: 16px 18px;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: var(--radius);
+    background: rgba(255,255,255,0.04);
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
   /* PHASES */
   .phases {
     display: grid;
@@ -568,7 +579,7 @@
   <div class="grid-bg"></div>
   <div class="badge">Azure Cloud Case Study · 2026</div>
   <h1>Building <span>TechNova</span><br>from the Ground Up</h1>
-  <p class="hero-sub">A self-directed journey designing, deploying, and securing a complete enterprise Azure cloud infrastructure from scratch.</p>
+  <p class="hero-sub">A screenshot-evidenced Azure infrastructure case study covering governance, hub-and-spoke networking, private VM access, load balancing, Key Vault, and backup configuration.</p>
   <div class="hero-meta">
     <div class="meta-item">
       <div class="meta-value">5</div>
@@ -599,9 +610,9 @@
     <p>
       <strong>TechNova Inc. is a growing Canadian tech startup.</strong> They've outgrown their on-premise servers and need to move to the cloud — but they need it done right. Secure. Scalable. Cost-efficient. Resilient enough to survive failures without going offline.
       <br><br>
-      As their newly contracted Cloud Administrator, I was handed one mandate: <strong>design and deploy a complete Azure cloud infrastructure from scratch</strong> — with no pre-built templates, no guided labs, and no safety net. Just an Azure subscription, a plan, and the skills to execute it.
+      For this case study, I worked from a blank Azure subscription and a business-style scenario: <strong>design and deploy a secure, segmented, cost-aware Azure infrastructure foundation</strong>. The goal was to show the planning and implementation thinking expected from an Azure or cloud administrator.
       <br><br>
-      Over two focused build sessions, I architected TechNova's entire cloud environment — from the first resource group to the final backup policy. Every decision had a reason. Every resource had a purpose. <strong>This is that story.</strong>
+      The build moves from governance to networking, compute, access, load balancing, and backup evidence. Every phase is tied to Azure Portal screenshots so the project can be reviewed without relying only on claims. <strong>This is that story.</strong>
     </p>
   </div>
 </section>
@@ -616,24 +627,25 @@
     <div class="obj-card">
       <span class="obj-icon">🔐</span>
       <h3>Security First</h3>
-      <p>Deploy an infrastructure where no resource is exposed unnecessarily. Every VM secured behind Bastion. Every role following least-privilege. Every disk encrypted.</p>
+      <p>Deploy workload VMs without direct public exposure. Use Bastion for management access, NSGs for subnet control, and RBAC review for resource-scope access.</p>
     </div>
     <div class="obj-card">
       <span class="obj-icon">⚡</span>
       <h3>Always Available</h3>
-      <p>Build a system that doesn't go down when a single server fails. Load balanced. Auto-scaling. Backed up. Designed to survive failures gracefully.</p>
+      <p>Reduce single-VM dependency with a Load Balancer, backend pool, health probe, Recovery Services Vault, and backup policy evidence.</p>
     </div>
     <div class="obj-card">
       <span class="obj-icon">💰</span>
       <h3>Cost Conscious</h3>
-      <p>Deliver enterprise-grade infrastructure without enterprise-grade waste. Budget alerts, right-sized VMs, lifecycle policies, and resource cleanup baked in from day one.</p>
+      <p>Build a cost-aware lab environment with budget tracking, tagging, lab-sized VM choices, and cleanup planning from day one.</p>
     </div>
   </div>
 
   <!-- ARCHITECTURE DIAGRAM -->
   <div class="arch-diagram">
     <img src="assets/diagrams/technova-reference-architecture.jpg" alt="TechNova Advanced Azure Infrastructure Architecture Diagram">
-    <div class="arch-caption">TechNova Advanced Azure Infrastructure — Hub-and-Spoke Architecture</div>
+    <div class="arch-caption">Reference target-state architecture — implemented evidence is scoped in the phases below</div>
+    <div class="scope-note">The diagram includes mature landing-zone services such as Azure Firewall, Application Gateway, Private Endpoints, Azure SQL, Azure Policy, PIM, and monitoring. Those are reference architecture items, not claimed as implemented in this repository.</div>
   </div>
 </section>
 
@@ -743,9 +755,9 @@
         <div>
           <span class="phase-tag tag-security">Security</span>
           <h3>Compute &amp; Security Hardening</h3>
-          <p>Two Linux VMs were deployed — but never exposed directly to the internet. Azure Bastion provides secure browser-based access with no public IP. RBAC enforces least-privilege across all roles. Microsoft Defender for Cloud monitors the entire environment for threats.</p>
+          <p>Two Linux VMs were deployed without public IPs on the VM NICs. Azure Bastion provides a secure browser-based management path. RBAC assignments were reviewed at resource scope, and Microsoft Defender for Cloud was included for security posture visibility.</p>
           <div class="phase-tasks">
-            <span class="task-chip">2x Linux VMs (B1s)</span>
+            <span class="task-chip">2x Linux VMs</span>
             <span class="task-chip">Azure Bastion</span>
             <span class="task-chip">RBAC Roles</span>
             <span class="task-chip">Defender for Cloud</span>
@@ -767,8 +779,8 @@
       <figcaption>VM2 successfully deployed and running</figcaption>
     </figure>
         <figure class="ss">
-      <img src="assets/screenshots/technova-16-rbac-least-privilege-role-assignments-on-resource-group.jpg" alt="RBAC — least-privilege role assignments on Resource Group" loading="lazy">
-      <figcaption>RBAC — least-privilege role assignments on Resource Group</figcaption>
+      <img src="assets/screenshots/technova-16-rbac-role-assignments-on-resource-group.jpg" alt="RBAC — role assignments on Resource Group" loading="lazy">
+      <figcaption>RBAC — role assignments reviewed on Resource Group</figcaption>
     </figure>
       </div>
       <div class="ss-grid cols-3" style="margin-top:12px;">
@@ -806,7 +818,7 @@
         <div>
           <span class="phase-tag tag-ha">High Availability</span>
           <h3>Load Balancing &amp; Resilience</h3>
-          <p>TechNova's app can't afford downtime. An Azure Load Balancer distributes incoming traffic across both VMs with health probes continuously checking server availability. If one VM goes down, traffic automatically shifts to the healthy one — users never notice.</p>
+          <p>An Azure Load Balancer distributes traffic across both VMs with health probes checking backend availability. If a backend fails its probe, Azure Load Balancer can stop routing traffic to that unhealthy instance based on the configured rule.</p>
           <div class="phase-tasks">
             <span class="task-chip">Azure Load Balancer</span>
             <span class="task-chip">Health Probes</span>
@@ -842,11 +854,11 @@
         <div>
           <span class="phase-tag tag-backup">Backup &amp; Storage</span>
           <h3>Data Protection &amp; Business Continuity</h3>
-          <p>Data loss is not an option. A Storage Account with access controls and lifecycle management policies was configured. Azure Backup protects both VMs with defined recovery policies — ensuring TechNova can recover from any failure with minimal data loss and downtime.</p>
+          <p>A Storage Account, Key Vault, Recovery Services Vault, and Azure Backup policy were configured to demonstrate data protection and recovery planning. Production use would still require restore testing, monitoring, and formal runbooks.</p>
           <div class="phase-tasks">
             <span class="task-chip">Storage Account</span>
             <span class="task-chip">RBAC Access Controls</span>
-            <span class="task-chip">Lifecycle Policies</span>
+            <span class="task-chip">Blob Container</span>
             <span class="task-chip">Azure Backup</span>
             <span class="task-chip">Recovery Services Vault</span>
           </div>
@@ -862,8 +874,8 @@
       <figcaption>Blob Container — storage container configured</figcaption>
     </figure>
         <figure class="ss">
-      <img src="assets/screenshots/technova-29-key-vault-technova-db-password-secret-stored.jpg" alt="Key Vault — TechNova-DB-Password secret stored" loading="lazy">
-      <figcaption>Key Vault — TechNova-DB-Password secret stored</figcaption>
+      <img src="assets/screenshots/technova-29-key-vault-secret-storage-pattern.jpg" alt="Key Vault — secret storage pattern configured" loading="lazy">
+      <figcaption>Key Vault — secret storage pattern configured</figcaption>
     </figure>
         <figure class="ss">
       <img src="assets/screenshots/technova-30-key-vault-overview-technova-kv01-configuration.jpg" alt="Key Vault overview — TechNova-KV01 configuration" loading="lazy">
@@ -880,8 +892,8 @@
       </div>
       <div class="ss-grid cols-1" style="margin-top:12px;">
         <figure class="ss">
-      <img src="assets/screenshots/technova-33-technova-rg-complete-infrastructure-all-17-resources-deployed.jpg" alt="TechNova-RG — complete infrastructure, all 17 resources deployed" loading="lazy">
-      <figcaption>TechNova-RG — complete infrastructure, all 17 resources deployed</figcaption>
+      <img src="assets/screenshots/technova-33-technova-rg-final-lab-resource-inventory.jpg" alt="TechNova-RG — final lab resource inventory" loading="lazy">
+      <figcaption>TechNova-RG — final lab resource inventory</figcaption>
     </figure>
       </div>
     </div>
@@ -899,7 +911,7 @@
     <div class="acc-grid">
       <div class="acc-item">
         <div class="acc-number">16+</div>
-        <div class="acc-desc">Azure services configured end-to-end</div>
+        <div class="acc-desc">Azure resources/services evidenced</div>
       </div>
       <div class="acc-item">
         <div class="acc-number">3</div>
@@ -907,11 +919,11 @@
       </div>
       <div class="acc-item">
         <div class="acc-number">0</div>
-        <div class="acc-desc">Public IPs exposed on production VMs</div>
+        <div class="acc-desc">Public IPs on workload VM NICs</div>
       </div>
       <div class="acc-item">
-        <div class="acc-number">~$40</div>
-        <div class="acc-desc">Total cost — well within $200 budget</div>
+        <div class="acc-number">33</div>
+        <div class="acc-desc">Azure Portal evidence screenshots</div>
       </div>
     </div>
     <div style="margin-top: 48px;">
@@ -927,8 +939,8 @@
         <span class="skill"><span class="skill-dot"></span>Storage Management</span>
         <span class="skill"><span class="skill-dot"></span>Cost Governance</span>
         <span class="skill"><span class="skill-dot"></span>Resource Tagging</span>
-        <span class="skill"><span class="skill-dot"></span>High Availability Design</span>
-        <span class="skill"><span class="skill-dot"></span>Disaster Recovery</span>
+        <span class="skill"><span class="skill-dot"></span>Availability Planning</span>
+        <span class="skill"><span class="skill-dot"></span>Backup Configuration</span>
       </div>
     </div>
   </div>
@@ -941,16 +953,16 @@
   <div class="section-label">The End Goal</div>
   <h2>Not just a project.<br><em>Proof I can do the job.</em></h2>
   <p style="max-width: 600px; margin: 0 auto; text-align: center; font-size: 18px;">
-    TechNova's infrastructure demonstrates that I can take a blank Azure subscription and deliver a secure, scalable, production-ready cloud environment — the exact skillset companies hire Cloud Administrators for.
+    TechNova demonstrates that I can take a blank Azure subscription, build a secure and segmented infrastructure foundation, document the evidence, and explain the production gaps a real team would close before go-live.
   </p>
   <div class="cta-row">
-    <a href="https://github.com/rahatislamanik-spec/TechNova-Azure-Infrastructure" class="cta cta-primary">View on GitHub</a>
-    <a href="https://linkedin.com/in/rahatislamanik" class="cta cta-secondary">Connect on LinkedIn</a>
+    <a href="https://github.com/rahatislamanik-spec/TechNova-Azure-Infrastructure" class="cta cta-primary" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+    <a href="https://linkedin.com/in/rahatislamanik" class="cta cta-secondary" target="_blank" rel="noopener noreferrer">Connect on LinkedIn</a>
   </div>
 </section>
 
 <footer>
-  Built by <strong>Md Rahat Islam Anik</strong> · Cloud Computing &amp; Network Administration · George Brown College · Toronto, Canada
+  Built by <strong>Md Rahat Islam Anik</strong> · Azure Infrastructure Case Study · Toronto, Canada
 </footer>
 
 <script>

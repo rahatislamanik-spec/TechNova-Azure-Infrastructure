@@ -27,7 +27,7 @@ This map links each evidence screenshot to the claim it supports. The project is
 | `assets/screenshots/technova-13-technova-vm1-overview-and-configuration-details.jpg` | VM1 configuration and private networking |
 | `assets/screenshots/technova-14-technova-vm2-overview-and-configuration-details.jpg` | VM2 configuration and private networking |
 | `assets/screenshots/technova-15-vm2-successfully-deployed-and-running.jpg` | VM2 running state |
-| `assets/screenshots/technova-16-rbac-least-privilege-role-assignments-on-resource-group.jpg` | RBAC role assignment review at resource scope |
+| `assets/screenshots/technova-16-rbac-role-assignments-on-resource-group.jpg` | RBAC role assignment review at resource scope |
 | `assets/screenshots/technova-17-web-nsg-overview-and-inbound-rules.jpg` | Web NSG overview and inbound rules |
 | `assets/screenshots/technova-18-nsg-http-port-80-and-https-port-443-rules-configured.jpg` | HTTP/HTTPS NSG rules |
 | `assets/screenshots/technova-19-nsg-additional-http-https-rule-confirmation.jpg` | Additional NSG rule confirmation |
@@ -40,11 +40,11 @@ This map links each evidence screenshot to the claim it supports. The project is
 | `assets/screenshots/technova-26-health-probe-continuously-checking-vm-availability.jpg` | Health probe configuration |
 | `assets/screenshots/technova-27-storage-account-overview-and-access-configuration.jpg` | Storage account overview |
 | `assets/screenshots/technova-28-blob-container-storage-container-configured.jpg` | Blob container configuration |
-| `assets/screenshots/technova-29-key-vault-technova-db-password-secret-stored.jpg` | Key Vault secret storage pattern; value not shown |
+| `assets/screenshots/technova-29-key-vault-secret-storage-pattern.jpg` | Key Vault secret storage pattern; value not shown |
 | `assets/screenshots/technova-30-key-vault-overview-technova-kv01-configuration.jpg` | Key Vault overview |
 | `assets/screenshots/technova-31-recovery-services-vault-backup-management.jpg` | Recovery Services Vault backup management |
 | `assets/screenshots/technova-32-azure-backup-vm-backup-policy-configured.jpg` | Azure Backup policy configuration |
-| `assets/screenshots/technova-33-technova-rg-complete-infrastructure-all-17-resources-deployed.jpg` | Final resource group inventory |
+| `assets/screenshots/technova-33-technova-rg-final-lab-resource-inventory.jpg` | Final resource group inventory |
 
 ## Not Claimed As Implemented
 
