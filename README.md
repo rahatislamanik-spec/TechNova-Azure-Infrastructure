@@ -187,6 +187,39 @@ This is a portfolio lab, not a production tenant handover. A production rollout 
 
 ---
 
+## Deployment Scripts
+
+The full infrastructure can be deployed using Azure CLI. Scripts are in the [`deploy/`](deploy/) folder — run in order.
+
+| Script | Phase | What It Deploys |
+|---|---|---|
+| [01-hub-spoke-networking.sh](deploy/01-hub-spoke-networking.sh) | Phase 02 | Resource Group, 3 VNets, VNet Peering, NSGs, Budget Alert |
+| [02-compute-security.sh](deploy/02-compute-security.sh) | Phase 03–05 | Bastion, 2x VMs (no public IPs), RBAC, Load Balancer, Key Vault, Backup |
+
+```bash
+# Clone and deploy
+git clone https://github.com/rahatislamanik-spec/TechNova-Azure-Infrastructure.git
+cd TechNova-Azure-Infrastructure/deploy
+
+# Login to Azure
+az login
+
+# Phase 1: Network foundation
+chmod +x 01-hub-spoke-networking.sh
+./01-hub-spoke-networking.sh
+
+# Phase 2: Compute and security
+chmod +x 02-compute-security.sh
+./02-compute-security.sh
+
+# Cleanup after lab (cost safety)
+az group delete --name TechNova-RG --yes --no-wait
+```
+
+> See [DESIGN-DECISIONS.md](DESIGN-DECISIONS.md) for architectural rationale behind every major choice.
+
+---
+
 ## Skills Demonstrated
 
 `Azure Infrastructure Design` · `Hub-and-Spoke Architecture` · `VNet Peering` · `Network Security Groups` · `Azure Bastion` · `RBAC Review` · `Microsoft Defender for Cloud` · `Load Balancing` · `Azure Key Vault` · `Secrets Management Pattern` · `Azure Backup` · `Cost Governance` · `Resource Tagging` · `Linux Administration`
