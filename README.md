@@ -1,4 +1,5 @@
 # TechNova Inc. — Azure Cloud Infrastructure
+> **Status:** Portfolio Complete — v1.0
 
 ### Azure Infrastructure Case Study · Hub-and-Spoke Networking · Screenshot-Evidenced Build
 
