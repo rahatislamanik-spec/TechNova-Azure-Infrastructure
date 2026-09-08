@@ -20,6 +20,7 @@
 # Prerequisites:
 #   - Azure CLI installed and logged in (az login)
 #   - Sufficient permissions on target subscription
+#   - Set BUDGET_ALERT_EMAIL below to your own address
 #
 # TechNova Inc. — fictional portfolio case study
 # =============================================================
@@ -30,6 +31,9 @@ set -e  # Exit on any error
 RESOURCE_GROUP="TechNova-RG"
 LOCATION="eastus"
 SUBSCRIPTION_ID=$(az account show --query id -o tsv)
+
+# Email to receive budget alerts — set to your own address before running
+BUDGET_ALERT_EMAIL="your-email@example.com"
 
 # VNet address spaces
 HUB_VNET="TechNova-Hub-VNet"
@@ -225,7 +229,7 @@ az consumption budget create \
     enabled=true \
     operator=GreaterThan \
     threshold=80 \
-    contactEmails=rahatislamanik@gmail.com 2>/dev/null || \
+    contactEmails="$BUDGET_ALERT_EMAIL" 2>/dev/null || \
   echo "  Budget alert skipped — requires billing scope permissions"
 
 echo ""
