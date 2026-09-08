@@ -1,0 +1,5 @@
+# Language stats: HTML in this repo is the published case-study showcase
+# and documentation, not application code. Exclude it from GitHub Linguist
+# so the language bar reflects the Azure CLI deployment scripts.
+
+*.html linguist-documentation
