@@ -47,7 +47,7 @@
 
 **Decision:** All credentials stored in Key Vault. No secrets hardcoded in scripts or configuration files.
 
-**Rationale:** A credential hardcoded in a script is a credential that will eventually end up in a git repository. Key Vault provides centralized secrets management with access policies, audit logging, soft delete, and rotation support. The DB password generated during deployment is stored as a Key Vault secret — the VM retrieves it at runtime via Managed Identity, never via a hardcoded string.
+**Rationale:** A credential hardcoded in a script is a credential that will eventually end up in a git repository. Key Vault provides centralized secrets management with access policies, audit logging, soft delete, and rotation support. The DB password generated during deployment is stored as a Key Vault secret — each VM has a system-assigned managed identity that is granted access to retrieve it at runtime, never via a hardcoded string.
 
 ---
 
