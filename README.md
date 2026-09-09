@@ -1,5 +1,5 @@
 # TechNova Inc. — Azure Cloud Infrastructure
-> **Status:** Portfolio Complete — v1.0
+> **Status:** Version 1
 
 ### Azure Infrastructure Case Study · Hub-and-Spoke Networking · Screenshot-Evidenced Build
 
@@ -11,8 +11,7 @@
 
 ---
 
-| 5 Phases | 16+ Azure Resources/Services | Screenshot Evidence | Cost-Aware Lab Build |
-|:---:|:---:|:---:|:---:|
+A hub-and-spoke Azure infrastructure lab, built from a blank subscription and evidenced with Azure Portal screenshots and Azure CLI deployment scripts.
 
 ---
 
@@ -22,9 +21,7 @@ TechNova Inc. — a growing Canadian tech startup — had outgrown their on-prem
 
 ## The Solution
 
-A production-style Azure infrastructure lab built from a blank subscription — hub-and-spoke VNet architecture, zero public IPs on workload VM NICs, Azure Bastion for secure access, Load Balancer with health probes, Key Vault for secrets management, and Recovery Services Vault backup configuration.
-
-**16+ Azure resources/services. Cost-aware build. Evidence mapped to screenshots.**
+A production-pattern Azure infrastructure lab built from a blank subscription — hub-and-spoke VNet architecture, zero public IPs on workload VM NICs, Azure Bastion for secure access, Load Balancer with health probes, Key Vault for secrets management, and Recovery Services Vault backup configuration.
 
 ---
 
@@ -56,9 +53,7 @@ Deliver a cost-aware lab environment without unnecessary resource sprawl. Budget
 ### Phase 01 — Resource Governance
 **TechNova-RG · Resource Tags · Budget Alert**
 
-Before a single VM is deployed, the environment needs structure. Phase 01 established TechNova's resource governance foundation — a dedicated resource group, consistent tagging across all resources, and a budget alert to enforce cost discipline from day one.
-
-A resource group without tags is a resource group no one can audit. Tags aren't optional overhead — they're the difference between a manageable cloud environment and a sprawling mess.
+Before a single VM is deployed, the environment needs structure. Phase 01 established TechNova's resource governance foundation — a dedicated resource group, consistent tagging across all resources, and a budget alert to enforce cost discipline from day one. Tags applied at creation time drive cost allocation and governance later; applied retroactively, they are never complete.
 
 ---
 
@@ -105,7 +100,7 @@ RBAC was reviewed and demonstrated at the resource-group scope. The evidence sho
 ### Phase 04 — Load Balancing & Resilience
 **Azure Load Balancer · Health Probes · Backend Pool**
 
-A single VM — no matter how well configured — is a single point of failure. Phase 04 placed an Azure Load Balancer in front of both VMs, distributing traffic across a backend pool with health probe monitoring.
+A single VM is a single point of failure. Phase 04 placed an Azure Load Balancer in front of both VMs, distributing traffic across a backend pool with health probe monitoring.
 
 Health probes continuously verify VM availability. When a probe fails, Azure Load Balancer can stop sending traffic to that unhealthy backend instance, depending on the configured rule and probe behavior.
 
@@ -121,7 +116,7 @@ The final layer: data protection and secrets management.
 - **Recovery Services Vault** — backup policy applied to both VMs
 - **Azure Backup** — backup policy and retention settings configured and evidenced in screenshots
 
-A hardened VM with no backup is still one bad day away from total data loss. Backup is not optional — it's the last line of defence.
+Backup was enabled during initial deployment, so the first recovery point is captured before any configuration drift accumulates.
 
 ---
 
@@ -195,7 +190,7 @@ The full infrastructure can be deployed using Azure CLI. Scripts are in the [`de
 | Script | Phase | What It Deploys |
 |---|---|---|
 | [01-hub-spoke-networking.sh](deploy/01-hub-spoke-networking.sh) | Phase 02 | Resource Group, 3 VNets, VNet Peering, NSGs, Budget Alert |
-| [02-compute-security.sh](deploy/02-compute-security.sh) | Phase 03–05 | Bastion, 2x VMs (no public IPs), RBAC, Load Balancer, Key Vault, Backup |
+| [02-compute-security.sh](deploy/02-compute-security.sh) | Phase 03–05 | Bastion, 2x VMs (no public IPs), managed identities, RBAC, Load Balancer, Storage, Key Vault, Backup |
 
 ```bash
 # Clone and deploy
@@ -238,7 +233,7 @@ The full interactive case study — with architecture diagrams, per-phase docume
 ## Author
 
 **Md Rahat Islam Anik**
-Azure Administrator · Cloud & Infrastructure Operations Specialist · Toronto, Canada
+Systems Administrator · Azure & Cloud Infrastructure · Toronto, Canada
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=flat&logo=linkedin)](https://linkedin.com/in/rahatislamanik)
 [![GitHub](https://img.shields.io/badge/GitHub-Portfolio-181717?style=flat&logo=github)](https://github.com/rahatislamanik-spec)
